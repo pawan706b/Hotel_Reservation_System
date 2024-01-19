@@ -1,0 +1,459 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hosthive</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <style>
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+
+            .btn-primary:hover {
+                background-color: #0069d9;
+                border-color: #0062cc;
+            }
+
+        .custom-submit-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+            .custom-submit-btn:hover {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+        .amount-text {
+            font-size: 18px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+    </style>
+
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8F8F8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            color: #333;
+        }
+
+        section {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+            input[type="submit"] {
+                background-color: #4CAF50;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+                input[type="submit"]:hover {
+                    background-color: #45A049;
+                }
+
+            input[type="text"], input[type="email"], input[type="password"] {
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+        select {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+            input[type="text"]:focus, input[type="email"]:focus, select:focus {
+                outline: none;
+                border: 1px solid #4CAF50;
+            }
+
+        input[type="submit"]:focus {
+            outline: none;
+        }
+
+        /* Additional Styling */
+        input[type="text"][id="card-number"], input[type="password"][id="cvv"] {
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 1px;
+        }
+
+            input[type="text"][id="card-number"]::placeholder, input[type="password"][id="cvv"]::placeholder {
+                font-family: 'Courier New', Courier, monospace;
+                letter-spacing: 1px;
+            }
+
+        input[type="text"][id="postal-code"] {
+            text-transform: uppercase;
+        }
+
+        input[type="text"][id="expiration-date"] {
+            width: calc(48% - 10px);
+        }
+
+        /* Style for the calendar icon */
+        .calendar-icon {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+            .calendar-icon::after {
+                content: '\1F4C5'; /* Unicode character for calendar */
+                font-size: 18px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+    </style>
+</head>
+<body style="display: block;">
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-dark px-0">
+        <div class="row gx-0">
+            <div class="col-lg-3 bg-dark d-none d-lg-block">
+                <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                    <h1 class="m-0 text-primary text-uppercase">Hosthive</h1>
+                </a>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
+                    <a href="index.html" class="navbar-brand d-block d-lg-none">
+                        <h1 class="m-0 text-primary text-uppercase">Hosthive</h1>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div style="margin-bottom: 100px;">
+        <form style="margin: auto;" onsubmit="return validateForm()" asp-action="Create" asp-controller="Billings" method="post" class="row">
+            <h1>Payment Details</h1>
+            <section>
+
+                <h2>Personal Information</h2>
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" required>
+
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" required>
+
+                <label for="city">City:</label>
+                <input type="text" id="city" required>
+
+                <label for="state">Province/State:</label>
+                <input type="text" id="state" required>
+
+                <label for="country">Country:</label>
+                <select id="country" required>
+                    <option value="">Select Country</option>
+                    <option value="Canada">Canada</option>
+                    <option value="US">US</option>
+                </select>
+
+                <label for="postal-code">Postal Code:</label>
+                <input type="text" id="postal-code" placeholder="e.g. A1A 1A1" required>
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" placeholder="e.g. 123-456-7890" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </section>
+
+            <section>
+                <h2>Card Details</h2>
+
+                <label for="card-type">Card Type:</label>
+                <select name="PaymentMethod" class="form-control" id="card-type" required>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="Visa">Visa</option>
+                    <option value="American Express">American Express</option>
+                    <!-- Add more payment methods as required -->
+                </select>
+
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" placeholder="e.g. 1111-2222-3333-4444" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="password" id="cvv" placeholder="e.g. 123" required>
+
+                <label for="expiration-date">Expiration Date:</label>
+                <div style="display: flex;">
+                    <input type="month" id="expiration-date" required>
+                </div>
+                <!-- Hidden ReservationID -->
+                <input type="hidden" name="ReservationID" value="@ViewBag.ReservationID" />
+                <input type="hidden" name="TotalAmount" class="form-control" readonly value="@ViewBag.TotalAmount" />
+
+                <!-- Room Rate as Total Amount (readonly) -->
+            </section>
+
+            <!-- Submit Button -->
+            <!-- Submit Button -->
+            <input type="submit" value="Pay @ViewBag.TotalAmount $" class="btn btn-primary custom-submit-btn" />
+        </form>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s">
+        <div class="container pb-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-4">
+                    <div class="bg-primary rounded p-4">
+                        <h1 class="text-white text-uppercase mb-3">Hotelier</h1>
+                        <p class="text-white mb-0">
+                            A premier hotel reservation platform, exclusively catering to travelers seeking the finest accommodations in the vibrant heart of Toronto..
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="section-title text-start text-primary text-uppercase mb-4">Contact</h6>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>923 Robie St, Halifax, NS B3H 3C3</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+902 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>hotel@smu.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="row gy-5 g-4">
+                        <div class="col-md-6">
+                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Company</h6>
+                            <a class="btn btn-link" href="">About Us</a>
+                            <a class="btn btn-link" href="">Contact Us</a>
+                            <a class="btn btn-link" href="">Privacy Policy</a>
+                            <a class="btn btn-link" href="">Terms & Condition</a>
+                            <a class="btn btn-link" href="">Support</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
+                            <a class="btn btn-link" href="">Food & Restaurant</a>
+                            <a class="btn btn-link" href="">Spa & Fitness</a>
+                            <a class="btn btn-link" href="">Sports & Gaming</a>
+                            <a class="btn btn-link" href="">Event & Party</a>
+                            <a class="btn btn-link" href="">GYM & Yoga</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="validationModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Validation Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="validationMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer End -->
+    <script>
+        function validateForm() {
+            // Get form inputs
+            var lastName = document.getElementById('last-name').value;
+            var firstName = document.getElementById('first-name').value;
+            var city = document.getElementById('city').value;
+            var state = document.getElementById('state').value;
+            var country = document.getElementById('country').value;
+            var postalCode = document.getElementById('postal-code').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+            var cardType = document.getElementById('card-type').value;
+            var cardNumber = document.getElementById('card-number').value;
+            var expirationDate = document.getElementById('expiration-date').value;
+            var cvv = document.getElementById('cvv').value;
+
+            // Define regex patterns
+            var namePattern = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
+            var cityStatePattern = /^[a-zA-Z\s]+$/;
+            var usZipCodePattern = /^\d{5}(-\d{4})?$/;
+            var canadianPostalCodePattern = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+            var phonePattern = /^(\+?1\s*[-.\s]?)?(\()?([2-9][0-9]{2})(\)?)([-.\s]?[0-9]{3})([-.\s]?[0-9]{4})$/;
+            var emailPattern = /^\w+([\.-]?\w+)@@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+            var mastercardPattern = /^(5[1-5][0-9]{14})$/;
+            var visaPattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
+            var amexPattern = /^3[47][0-9]{13}$/;
+            var cvvPattern = /^\d{3,4}$/;
+
+            console.log(!namePattern);
+            // Validate Last Name
+            if (!namePattern.test(lastName)) {
+                alert('Invalid characters in last name.');
+                return false;
+            }
+
+            // Validate First Name
+            if (!namePattern.test(firstName)) {
+                alert('Invalid characters in first name.');
+                return false;
+            }
+
+            // Validate City
+            if (!cityStatePattern.test(city)) {
+                alert('Invalid characters in city.');
+                return false;
+            }
+
+            // Validate State
+            if (!cityStatePattern.test(state)) {
+                alert('Invalid characters in state.');
+                return false;
+            }
+
+            // Validate Country
+            if (country !== 'Canada' && country !== 'US') {
+                alert('Invalid country selection.');
+                return false;
+            }
+
+            // Validate Postal Code
+            if ((country === 'Canada' && !canadianPostalCodePattern.test(postalCode)) ||
+                (country === 'US' && !usZipCodePattern.test(postalCode))) {
+                alert('Invalid postal code.');
+                return false;
+            }
+
+            // Validate Phone
+            if (!phonePattern.test(phone)) {
+                alert('Invalid Phone Number.');
+                return false;
+            }
+
+            // Validate Email
+            if (!emailPattern.test(email)) {
+                alert('Invalid email address.');
+                return false;
+            }
+
+            // Validate Card Number
+            if ((cardType === 'MasterCard' && !mastercardPattern.test(cardNumber)) ||
+                (cardType === 'Visa' && !visaPattern.test(cardNumber)) ||
+                (cardType === 'American Express' && !amexPattern.test(cardNumber))) {
+                alert('Invalid card number.');
+                return false;
+            }
+
+            // Validate CVV
+            if (!cvvPattern.test(cvv)) {
+                alert('Invalid CVV.');
+                return false;
+            }
+
+            // Validate Expiration Date
+            var today = new Date();
+            var expDate = new Date(expirationDate);
+            if (expDate < today) {
+                alert('Card expiration date cannot be in the past.');
+                return false;
+            }
+
+            // If all validations pass, submit the form
+            alert('Form submitted successfully!');
+            return true;
+        }
+
+        function showPopup(message) {
+            showPopup(message)
+            // Set the message in the modal
+            
+        }
+
+    </script>
+
+</body>
+</html>
